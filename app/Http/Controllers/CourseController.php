@@ -35,6 +35,13 @@ class CourseController extends Controller
         return view('course.select', compact('user', 'teachers', 'courses', 'freecourses', 'selected_date', 'datedcourses'));
     }
 
+    public function selects()
+    {
+        $selected_date = date('Y-m-d');
+
+        return redirect()->route('course.select', compact('selected_date'));
+    }
+
     //學生端時間查詢-POST
     public function post(Request $request)
     {

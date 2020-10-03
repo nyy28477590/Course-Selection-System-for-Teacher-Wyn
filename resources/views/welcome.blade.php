@@ -71,7 +71,9 @@
                         @can('admin')
                         <a href={{ route('course.creates') }}>Open a Course</a>
                         @endcan
-                        <a href="{{ route('course.select', 'selected_date') }}">Select a course</a>
+                        @can('user')
+                        <a href="{{ route('course.selects') }}">Select a course</a>
+                        @endcan
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

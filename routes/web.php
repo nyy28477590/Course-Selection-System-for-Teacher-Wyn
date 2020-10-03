@@ -29,6 +29,7 @@ Route::post('/home/cancel', 'HomeController@cancel')->name('home.cancel');
 Route::post('/home/add', 'HomeController@add')->name('home.add');
 
 //學生選課
+Route::get('/course/selects', 'CourseController@selects')->name('course.selects');
 Route::get('/course/select/{selected_date}', 'CourseController@select')->name('course.select');
 Route::post('/course/select/{selected_date}', 'CourseController@post')->name('course.post');
 Route::post('/courses/select/{selected_date}', 'CourseController@book')->name('course.book');

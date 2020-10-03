@@ -56,7 +56,7 @@
                             @endcan
                             @can('user')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('course.select', 'selected_date')}}">Select a Course</a>
+                                <a class="nav-link" href="{{ route('course.selects')}}">Select a Course</a>
                             </li>
                             @endcan
                             <li class="nav-item dropdown">
