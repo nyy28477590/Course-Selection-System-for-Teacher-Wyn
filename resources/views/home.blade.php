@@ -67,31 +67,39 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         
                         <table class="table">
                             <tr>
                                 <th>Date</th>
                                 <th>Time</th>
+                                <th>Teacher</th>
                                 <th>Cancel</th>
                             </tr>
-                            <form action="{{ route('home.cancel') }}" method="post">
-                            {{ csrf_field() }}
+                            
                                 @foreach ($books as $book)
                                 <tr>
                                     <td>{{ $book->t_date }}</td>
                                     <td>{{ $book->t_time }}</td>
+                                    <td>{{ $book->teacher }}</td>
                                     @if (strtotime($book->t_date. " ". $book->t_time) >= strtotime($now))
                                     <td>
-                                        <input type="hidden" name="date" value="{{ $book->t_date}}">
-                                        <input type="hidden" name="time" value="{{ $book->t_time}}">
-                                        <input type="submit" value="cancel">
+                                        <form action="{{ route('home.cancel') }}" method="post">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="date" value="{{ $book->t_date}}">
+                                            <input type="hidden" name="time" value="{{ $book->t_time}}">
+                                            <input type="submit" value="cancel">
+                                        </form>
                                     </td>
                                     @else
                                     <td>Finished</td>
                                     @endif
                                 </tr>
                                 @endforeach
-                            </form>
                         </table>
                         
                     </div>

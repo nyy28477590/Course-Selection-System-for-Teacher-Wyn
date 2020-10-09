@@ -51,18 +51,30 @@ class HomeController extends Controller
         return view('home.history', compact('all_books', 'user', 'now'));
     }
 
+    //學生端取消課程
     public function cancel(request $request)
     {
         $user = auth()->user();
         $date = $request->input('date');
         $time = $request->input('time');
 
-        Teacher::where('t_date', $date)->where('t_time', $time)
-                ->update(['student' => null, 'booked' => '0', 'student_ID' => null]);
+        $booked = Teacher::where('t_date', '=', $date)->where('t_time', '=', $time);
+        $booked_num = $booked->first();
+        $update = $booked->update(['student' => null, 'booked' => '0', 'student_ID' => null]);
 
-        User::where('email', $user->email)->update(['ticket' => $user->ticket += 1]);
+        if ($booked_num['booked'] == 1){
+            
+            $update;
 
-        return redirect('home');
+            User::where('email', $user->email)->update(['ticket' => $user->ticket += 1]);
+
+            return redirect()->back()->with('status', 'You have canceled successfully!');
+        }
+        else {
+            return redirect()->back()->with('error', 'Class not found!');
+        }
+        
+        
     }
 
     public function add(request $request)

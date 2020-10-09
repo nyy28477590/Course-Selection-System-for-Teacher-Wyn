@@ -17,12 +17,14 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Time</th>
+                                <th>Teacher</th>
                                 <th>Status</th>
                             </tr>
                             @foreach ( $all_books as $all_book)
                             <tr>
                                 <td>{{ $all_book->t_date }}</td>
                                 <td>{{ $all_book->t_time }}</td>
+                                <td>{{ $all_book->teacher }}</td>
                                 @if (strtotime($all_book->t_date.$all_book->t_time) >= strtotime($now))
                                     <td>
                                         <form action="{{ route('home.cancel') }}" method="post">

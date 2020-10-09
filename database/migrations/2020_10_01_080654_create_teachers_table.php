@@ -17,6 +17,7 @@ class CreateTeachersTable extends Migration
             $table->increments('id');
             $table->date('t_date');
             $table->time('t_time');
+            $table->char('teacher')->nullable();
             $table->integer('booked');
             $table->char('student')->nullable();
             $table->integer('student_ID')->nullable();

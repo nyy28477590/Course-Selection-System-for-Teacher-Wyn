@@ -13,6 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
                     <form action="{{{ route('course.post', 'selected_date') }}}" method="POST">
                         {{ csrf_field() }}
@@ -23,29 +28,31 @@
                         <br /><br />
                     </form>
                     
-                    <p>{{ __('Opened classes')}}</p>
+                    <p>{{ __('Opened classes in this week') }}</p>
                     <table class="table">
                         <tr>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Teacher</th>
                             <th>Student</th>
                         </tr>
-                        @foreach ($datedcourses as $datedcourse)
+                        @foreach ($weekcourses as $weekcourse)
                         <tr>
-                            <td>{{ $datedcourse->t_date}}</td>
-                            <td>{{ $datedcourse->t_time}}</td>
-                            @if ($datedcourse->student == null)
+                            <td>{{ $weekcourse->t_date}}</td>
+                            <td>{{ $weekcourse->t_time}}</td>
+                            <td>{{ $weekcourse->teacher }}</td>
+                            @if ($weekcourse->student == null)
                                 <td>
                                     <form action="{{ route('course.book', 'selected_date') }}" method="post">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="t_date" value="{{ $datedcourse->t_date }}">
-                                        <input type="hidden" name="t_time" value="{{ $datedcourse->t_time }}">
+                                        <input type="hidden" name="t_date" value="{{ $weekcourse->t_date }}">
+                                        <input type="hidden" name="t_time" value="{{ $weekcourse->t_time }}">
                                         <input type="hidden" name="student" value="{{ $user->name }}">
                                         <input type="submit" value="Book">
                                     </form>
                                 </td>
                             @else
-                            <td>{{ $datedcourse->student }}</td>
+                            <td>{{ $weekcourse->student }}</td>
                             @endif
                         </tr>
                         @endforeach
