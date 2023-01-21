@@ -8,9 +8,8 @@
 </p>
 
 ## About the project
-
-This project is made by Laravel framwork. It is a website for class selection.
-Visit the website: https://young-atoll-48744.herokuapp.com/ 
+- Designed and developed a course selection web application deployed on Heroku for 2 teachers and 10 students.
+- Implemented course registration, cancelation, creation, deletion, and ticket generation using the PHP Laravel Framework based on MVC structure and supported Responsive Web Design by the Bootstrap frontend toolkit.
 
 ## About Laravel
 
